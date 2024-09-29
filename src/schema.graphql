@@ -1,0 +1,36 @@
+
+"""
+GraphQLスキーマの定義
+"""
+# クエリ型の定義 データの取得が目的
+type Query {
+  info: String!
+  feed: [Link]!
+}
+
+# ミューテーション型の定義 データの変更をするのが目的
+type Mutation {
+  post(url: String!, description: String!): Link!
+  signup(email: String!, password: String!, name: String!): AuthPayload
+  login(email: String!, password: String!): AuthPayload
+}
+
+# リンク型の定義
+type Link {
+  id: ID!
+  description: String!
+  url: String!
+  postedBy: User
+}
+
+type AuthPayload {
+  token: String
+  user: User
+}
+
+type User {
+  id: ID!
+  name: String!
+  email: String!
+  links: [Link!]!
+}
